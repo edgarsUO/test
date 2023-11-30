@@ -22,3 +22,15 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    App\HttpClient\CurrencyRatesClient:
+        arguments:
+            $baseCurrency: '%env(enum:App\Enum\CurrencyEnum:BASE_CURRENCY)%'
+            $ratesApiKey: '%env(RATES_API_KEY)%'
+
+    App\Validator\IsBaseCurrency\IsBaseCurrencyValidator:
+        arguments:
+            $baseCurrency: '%env(enum:App\Enum\CurrencyEnum:BASE_CURRENCY)%'
+
+    App\Repository\RateRepository:
+        public: true
