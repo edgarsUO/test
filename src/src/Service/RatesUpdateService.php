@@ -30,7 +30,7 @@ final readonly class RatesUpdateService
             $currency = $rate->currency;
             $rateValue = $rate->value;
 
-            $existingRate = $this->rateRepository->findByCurrency($currency);
+            $existingRate = $this->rateRepository->byCurrency($currency);
 
             if (null === $existingRate) {
                 $rate = new Rate(

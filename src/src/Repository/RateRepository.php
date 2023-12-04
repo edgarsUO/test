@@ -25,13 +25,21 @@ final class RateRepository extends ServiceEntityRepository
     /**
      * @throws NonUniqueResultException
      */
-    public function findByCurrency(string $currency): ?Rate
+    public function byCurrency(string $currency): ?Rate
     {
         return $this->createQueryBuilder('r')
             ->andWhere('r.currency = :currency')
             ->setParameter('currency', $currency)
             ->getQuery()
             ->getOneOrNullResult();
+    }
+
+    public function supportedCurrencies(): array
+    {
+        return $this->createQueryBuilder('r')
+            ->select('r.currency')
+            ->getQuery()
+            ->getArrayResult();
     }
 
     public function add(Rate $rate): void

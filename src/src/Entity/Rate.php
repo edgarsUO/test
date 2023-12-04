@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Enum\DecimalPrecisionEnum;
 use App\Repository\RateRepository;
 use DateTimeInterface;
 use Decimal\Decimal;
@@ -22,7 +23,12 @@ class Rate
     #[ORM\Column(length: 3, unique: true)]
     private string $currency;
 
-    #[ORM\Column(type: 'php_decimal', precision: 32, scale: 16, nullable: false)]
+    #[ORM\Column(
+        type: 'php_decimal',
+        precision: DecimalPrecisionEnum::PRECISION->value,
+        scale: DecimalPrecisionEnum::SCALE->value,
+        nullable: false
+    )]
     private Decimal $value;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]

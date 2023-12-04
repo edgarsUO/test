@@ -15,9 +15,7 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 final class RatesUpdateServiceTest extends KernelTestCase
 {
     private RateRepository $rateRepository;
-
     private CurrencyRatesParser $currencyRatesParser;
-
     private RatesUpdateService $ratesUpdateService;
 
     public function setUp(): void

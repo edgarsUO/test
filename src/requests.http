@@ -1,0 +1,28 @@
+### Client
+GET http://localhost/api/client
+Content-Type: application/json
+
+{
+  "uuid": "0d25b8e8-7838-44fa-908f-e2223cea94c7"
+}
+
+### Account
+GET http://localhost/api/account
+Content-Type: application/json
+
+{
+  "uuid": "a3eee271-d399-4139-95c1-66cbc3d3a284",
+  "limit": 5,
+  "offset": 0
+}
+
+### Transaction
+GET http://localhost/api/transaction
+Content-Type: application/json
+
+{
+  "sender": "d87a5e5a-be68-4b33-b81a-ccda9397a76f",
+  "receiver": "5f19c5b0-48d3-4595-8289-6bb31e7ed4c8",
+  "currency": "USD",
+  "amount": "20"
+}

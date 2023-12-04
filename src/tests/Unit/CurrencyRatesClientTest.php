@@ -12,9 +12,6 @@ use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
 
 final class CurrencyRatesClientTest extends TestCase
 {
-//    use DoctrineFixturesReloadingTrait;
-//    private static array $fixturesGroups = [ClientFixtures::GROUP];
-
     private static function ratesClient(array $responses): CurrencyRatesClient
     {
         return new CurrencyRatesClient(

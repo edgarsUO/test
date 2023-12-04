@@ -34,3 +34,25 @@ services:
 
     App\Repository\RateRepository:
         public: true
+
+    # Serializer
+    Symfony\Component\Serializer\Normalizer\DateTimeNormalizer:
+        arguments:
+            $defaultContext:
+                datetime_format: 'Y-m-d\TH:i:sP'
+
+    object_normalizer:
+        class: Symfony\Component\Serializer\Normalizer\ObjectNormalizer
+    enum_normalizer:
+        class: App\Serializer\Normalizer\EnumNormalizer
+    uuid_normalizer:
+        class: App\Serializer\Normalizer\UuidNormalizer
+    decimal_normalizer:
+        class: App\Serializer\Normalizer\DecimalNormalizer
+    json_encoder:
+        class: Symfony\Component\Serializer\Encoder\JsonEncoder
+
+    Symfony\Component\Serializer\Serializer:
+        arguments:
+            $normalizers: [ '@object_normalizer', '@enum_normalizer', '@uuid_normalizer', '@decimal_normalizer']
+            $encoders: [ '@json_encoder' ]
