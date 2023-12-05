@@ -2,8 +2,8 @@
 
 namespace App\Service;
 
-use App\DTO\ConversionResult;
 use App\Enum\CurrencyEnum;
+use App\Model\ConversionResult;
 use App\Repository\RateRepository;
 use Decimal\Decimal;
 

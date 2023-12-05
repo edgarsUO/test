@@ -2,7 +2,7 @@
 
 namespace App\Validator\IsSupportedCurrency;
 
-use App\Repository\RateRepository;
+use App\Enum\CurrencyEnum;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
@@ -10,10 +10,6 @@ use Symfony\Component\Validator\Exception\UnexpectedValueException;
 
 final class IsSupportedCurrencyValidator extends ConstraintValidator
 {
-    public function __construct(private readonly RateRepository $rates)
-    {
-    }
-
     public function validate(mixed $value, Constraint $constraint): void
     {
         if (!$constraint instanceof IsSupportedCurrency) {
@@ -28,8 +24,7 @@ final class IsSupportedCurrencyValidator extends ConstraintValidator
             throw new UnexpectedValueException($value, 'string');
         }
 
-        $supportedCurrencies = $this->rates->supportedCurrencies();
-        if (!in_array($value, $supportedCurrencies)) {
+        if (null !== CurrencyEnum::tryFrom($value)) {
             return;
         }
 

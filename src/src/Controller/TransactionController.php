@@ -3,9 +3,10 @@
 use App\DTO\TransactionRequest\TransactionRequestDTO;
 use App\Exception\AccountException;
 use App\Exception\TransactionException;
-use App\Service\CreateTransactionService;
-use OpenApi\Attributes as OA;
+use App\Service\Transaction\ExecuteTransactionService;
+use App\Service\Transaction\PrepareTransactionService;
 use Nelmio\ApiDocBundle\Annotation\Model;
+use OpenApi\Attributes as OA;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,10 +27,12 @@ class TransactionController extends AbstractController
     #[OA\Response(response: 422, description: 'Request validation failed')]
     public function create(
         #[MapRequestPayload] TransactionRequestDTO $request,
-        CreateTransactionService $transactionService
+        PrepareTransactionService $prepareTransactionService,
+        ExecuteTransactionService $executeTransactionService
     ): Response {
         try {
-            $transactionService->create($request);
+            $executionInput = $prepareTransactionService->prepareTransaction($request);
+            $executeTransactionService->execute($executionInput);
         } catch (AccountException $exception) {
             throw new NotFoundHttpException($exception->getMessage(), $exception);
         } catch (TransactionException $exception) {

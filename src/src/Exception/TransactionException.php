@@ -16,4 +16,9 @@ final class TransactionException extends UnexpectedValueException
     {
         return new self(sprintf('Sender balance is lower than deduction amount %.6f', $deductionAmount));
     }
+
+    public static function sameAccountTransaction(): self
+    {
+        return new self('Transactions between same accounts are not supported');
+    }
 }

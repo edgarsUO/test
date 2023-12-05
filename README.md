@@ -19,8 +19,7 @@ Troubleshooting:
 
 Notes:
 1. Due to insufficient time, tests cover only rates api functionality. App functionality tests are still to be added.
-2. Improvements like database locks, additional checks for same account transactions, refactoring into smaller chunks
-   are required for CreateTransactionService - basically not yet polished due to insufficient time.
+2. Database locking should be implemented for transactions to avoid partial execution.
 3. Validators and serializers should be covered by tests.
 4. For testing simplicity, `<project_root>/docker/.env` already contains all variables, though a bad practice.
 5. PHP-FPM dockerfile should be refactored to use alpine distro for improved performance.
